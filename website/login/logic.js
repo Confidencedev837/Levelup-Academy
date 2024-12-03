@@ -72,6 +72,6 @@ signupForm.addEventListener('submit', function (event) {
         })
         .catch(error => {
             console.error('Error creating user:', error);
-            alert('Signup failed. Please try again.');
+            alert('Signup failed:${error.message} .');
         });
 });
