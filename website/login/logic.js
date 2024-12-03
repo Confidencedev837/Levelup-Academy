@@ -65,13 +65,15 @@ signupForm.addEventListener('submit', function (event) {
 
     // Call the create user method using the Account API
     account.create('unique()', email, password, name)
-        .then(response => {
-            console.log('User created:', response);
-            alert('Signup successful! Please login.');
-            showForm('login'); // Show login form after successful signup
-        })
-        .catch(error => {
-            console.error('Error creating user:', error);
-            alert('Signup failed:', error);
-        });
+    .then(response => {
+        console.log('User created:', response);
+        alert('Signup successful! Please login.');
+        showForm('login'); // Show login form after successful signup
+    })
+    .catch(error => {
+        console.error('Error creating user:', error);
+        // Show the error message to the user
+        alert(`Signup failed: ${error.message}`);
+    });
+
 });
