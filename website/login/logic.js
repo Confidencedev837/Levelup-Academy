@@ -45,38 +45,33 @@ document.addEventListener("DOMContentLoaded", () => {
     
   });
 
- // Initialize the Appwrite client
+// Initialize the Appwrite client
 const client = new Appwrite.Client();
 client
     .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite endpoint
-    .setProject('674ef28f0002deb93b5f'); // Replace with your actual project ID
+    .setProject('674ef28f0002deb93b5f'); // Your project ID
 
 // Create an instance of the Account API
 const account = new Appwrite.Account(client);
 
 // Handle the signup form submission
 const signupForm = document.getElementById('signup-form');
-
-// Listen for form submission
 signupForm.addEventListener('submit', function (event) {
-  event.preventDefault(); // Prevent form from submitting the default way (page refresh)
+    event.preventDefault(); // Prevent form from submitting the default way (page refresh)
 
-  const name = document.getElementById('signup-name').value;
-  const email = document.getElementById('signup-email').value;
-  const password = document.getElementById('signup-password').value;
+    const name = document.getElementById('signup-name').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
 
-  // Correct way to initialize Users API
-  const users = client.users;
-
-  // Call the create user method
-  users.create('unique()', email, password, name)
-    .then(response => {
-      console.log('User created:', response);
-      alert('Signup successful! Please login.');
-      showForm('login'); // Show login form after successful signup
-    })
-    .catch(error => {
-      console.error('Error creating user:', error);
-      alert('Signup failed. Please try again.');
-    });
+    // Call the create user method using the Account API
+    account.create('unique()', email, password, name)
+        .then(response => {
+            console.log('User created:', response);
+            alert('Signup successful! Please login.');
+            showForm('login'); // Show login form after successful signup
+        })
+        .catch(error => {
+            console.error('Error creating user:', error);
+            alert('Signup failed. Please try again.');
+        });
 });
