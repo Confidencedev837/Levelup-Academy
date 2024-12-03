@@ -86,7 +86,7 @@ document.getElementById('login-form').addEventListener('submit', function (event
   const password = document.getElementById('login-password').value;
 
   // Create an email session for the user
-  account.createEmailSession(email, password)
+  account.createSession(email, password)
       .then((response) => {
           console.log('Login successful:', response);
           alert('Login successful! Redirecting to your profile page...');
