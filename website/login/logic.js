@@ -78,24 +78,26 @@ signupForm.addEventListener('submit', function (event) {
 
 });
 
-// Handle login form submission
-document.getElementById('login-form').addEventListener('submit', function (event) {
-  event.preventDefault(); // Prevent default form submission (page refresh)
+// Handle the login form submission
 
-  const email = document.getElementById('login-email').value;
-  const password = document.getElementById('login-password').value;
+const loginForm = document.getElementById('login-form');
+loginForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the form from submitting the default way (page refresh)
 
-  // Create an email session for the user
-  account.createSession(email, password)
-      .then((response) => {
-          console.log('Login successful:', response);
-          alert('Login successful! Redirecting to your profile page...');
-          
-          // Redirect to the profile page
-          window.location.href = '/profile.html'; // Replace with your profile page path
-      })
-      .catch((error) => {
-          console.error('Login failed:', error);
-          alert(`Login failed: ${error.message}`);
-      });
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    // Call the createEmailSession method for logging in
+    const account = new Appwrite.Account(client);
+    account.createSession(email, password)
+        .then(response => {
+            console.log('Login successful:', response);
+            alert('Login successful! Redirecting to your profile page...');
+            window.location.href = '/profile.html'; // Replace with the actual path to your profile page
+        })
+        .catch(error => {
+            console.error('Login failed:', error);
+            // Show the error message to the user
+            alert(`Login failed: ${error.message}`);
+        });
 });
