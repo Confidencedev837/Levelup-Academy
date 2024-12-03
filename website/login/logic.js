@@ -45,42 +45,37 @@ document.addEventListener("DOMContentLoaded", () => {
     
   });
 
-  import { Client, Account, Users } from '@appwrite/sdk'; // Ensure correct import
-
   // Initialize the Appwrite client
-  const client = new Client();
-  client
-      .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite endpoint
-      .setProject('674ef28f0002deb93b5f'); // Replace with your actual project ID
-  
-  // Create an instance of the Account API
-  const account = new Account(client);
-  
-  // Handle the signup form submission
-  const signupForm = document.getElementById('signup-form');
-  
-  // Listen for form submission
-  signupForm.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent form from submitting the default way (page refresh)
-  
-    const name = document.getElementById('signup-name').value;
-    const email = document.getElementById('signup-email').value;
-    const password = document.getElementById('signup-password').value;
-  
-    const users = new Users(client); // Ensure Users API is correctly initialized
-  
-    // Call the create user method
-    users.create('unique()', email, password, name)
-      .then(response => {
-        console.log('User created:', response);
-        alert('Signup successful! Please login.');
-        showForm('login'); // Show login form after successful signup
-      })
-      .catch(error => {
-        console.error('Error creating user:', error);
-        alert('Signup failed. Please try again.');
-      });
-  });
-  
+const client = new Appwrite.Client();
+client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite endpoint
+    .setProject('674ef28f0002deb93b5f'); // Replace with your actual project ID
 
-  
+// Create an instance of the Account API
+const account = new Appwrite.Account(client);
+
+// Handle the signup form submission
+const signupForm = document.getElementById('signup-form');
+
+// Listen for form submission
+signupForm.addEventListener('submit', function (event) {
+  event.preventDefault(); // Prevent form from submitting the default way (page refresh)
+
+  const name = document.getElementById('signup-name').value;
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+
+  const users = new Appwrite.Users(client); // Ensure Users API is correctly initialized
+
+  // Call the create user method
+  users.create('unique()', email, password, name)
+    .then(response => {
+      console.log('User created:', response);
+      alert('Signup successful! Please login.');
+      showForm('login'); // Show login form after successful signup
+    })
+    .catch(error => {
+      console.error('Error creating user:', error);
+      alert('Signup failed. Please try again.');
+    });
+});
