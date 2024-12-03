@@ -77,3 +77,25 @@ signupForm.addEventListener('submit', function (event) {
     });
 
 });
+
+// Handle login form submission
+document.getElementById('login-form').addEventListener('submit', function (event) {
+  event.preventDefault(); // Prevent default form submission (page refresh)
+
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  // Create an email session for the user
+  account.createEmailSession(email, password)
+      .then((response) => {
+          console.log('Login successful:', response);
+          alert('Login successful! Redirecting to your profile page...');
+          
+          // Redirect to the profile page
+          window.location.href = '/profile.html'; // Replace with your profile page path
+      })
+      .catch((error) => {
+          console.error('Login failed:', error);
+          alert(`Login failed: ${error.message}`);
+      });
+});
