@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
   });
 
-  // Initialize the Appwrite client
+ // Initialize the Appwrite client
 const client = new Appwrite.Client();
 client
     .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite endpoint
@@ -65,7 +65,8 @@ signupForm.addEventListener('submit', function (event) {
   const email = document.getElementById('signup-email').value;
   const password = document.getElementById('signup-password').value;
 
-  const users = new Appwrite.Users(client); // Ensure Users API is correctly initialized
+  // Correct way to initialize Users API
+  const users = client.users;
 
   // Call the create user method
   users.create('unique()', email, password, name)
