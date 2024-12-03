@@ -5,7 +5,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Playpen+Sans:wght@100..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <script src="logic.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+<script>
+    const { Client } = Appwrite;
+    const client = new Appwrite.Client();
+</script>
   <link rel="stylesheet" href="signuppage.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Level-Up | Academy</title>
@@ -23,7 +27,7 @@
       background-attachment: fixed;
       background-repeat: no-repeat;
       background-size: cover;
-      background-color: black;
+      background-color: rgb(255, 255, 255);
       
       display: flex;
       justify-content: center;
@@ -273,6 +277,7 @@
         buttons[0].classList.remove('active');
       }
     }
+    
   </script>
 </body>
 </html>
