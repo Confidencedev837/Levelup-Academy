@@ -89,7 +89,7 @@ loginForm.addEventListener('submit', function (event) {
 
     // Call the createEmailSession method for logging in
     const account = new Appwrite.Account(client);
-    account.createSession(email, password)
+    account.createSession('unique()', email, password,)
         .then(response => {
             console.log('Login successful:', response);
             alert('Login successful! Redirecting to your profile page...');
