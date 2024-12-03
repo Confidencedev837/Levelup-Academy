@@ -1,0 +1,90 @@
+.grid-container {
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns by default */
+    gap: 20px; /* Space between grid items */
+    padding: 20px;
+  }
+
+  .grid-item {
+    background-color: #f5f5f5;
+    border: 4px ;
+    border-radius: 30px;
+    padding: 3rem;
+    height: 70%;
+    width: 70%;
+    text-align: center;
+    box-shadow: 0 2px 30px rgb(0, 255, 115);
+    opacity: 0; /* Start hidden */
+    transform: scale(0.8) skewX(20deg) scale(0.9, 1); /* Start small and skewed */
+    transition: transform 2s ease-out, opacity 2s ease-out; /* Smooth animation */
+  }
+.grid-item:hover{
+    transition: box-shadow 0.3s ease-out;
+    box-shadow: 0 2px 40px rgb(255, 255, 255);
+}
+
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .grid-container {
+        row-gap: 40px; /* Space between grid items */
+        padding: 4px;
+      grid-template-columns: 1fr; /* 1 column for small screens */
+    }
+    .grid-item {
+        background-color: #f5f5f5;
+        border-bottom: 10rem;
+        border-radius: 30px;
+        height: fit-content;
+        width: fit-content;
+        padding: 2rem;
+        gap: 20px;
+        text-align: center;
+        box-shadow: 0 2px 30px rgb(0, 255, 115);
+        opacity: 0; /* Start hidden */
+        transform: scale(0.8) skewX(20deg) scale(0.9, 1); /* Start small and skewed */
+        transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Smooth animation */
+      }
+      .flutterlogo{
+        width: 10%;
+        color: #ff0000;
+        height: 10rem;
+        display: block;
+        padding-bottom: 5%;
+      }
+
+  }
+
+  .grid-item.visible {
+    opacity: 1; /* Make visible */
+    transform: scale(1) skewX(0); /* Reset scale and skew */
+  }
+
+  .grid-item ul {
+    text-align: left;
+    list-style-type: disc;
+    padding: 0px 2px 10px 2px 0px;
+  }
+  
+  .par{
+   margin-bottom: 1rem;
+   
+  }
+  .para{
+    text-align: center;
+    color: rgb(21, 255, 0);
+    font-weight: 700;
+    font-family: "Space Grotesk";
+    font-size: 2rem;
+  }
+  .flutterlogo{
+    display: flex;
+    flex-wrap: wrap;
+    width: min-content;
+    height: 5rem;
+    display: block;
+    padding: 0;
+  }
+
+  
+  
