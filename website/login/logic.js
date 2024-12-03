@@ -45,18 +45,18 @@ document.addEventListener("DOMContentLoaded", () => {
     
   });
 
-
-  import { Client, Account, Users } from 'appwrite';
+  import { Client, Account, Users } from '@appwrite/sdk'; // Ensure correct import
 
   // Initialize the Appwrite client
   const client = new Client();
   client
       .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite endpoint
-      .setProject('674ef28f0002deb93b5f'); // Replace with your project ID
+      .setProject('674ef28f0002deb93b5f'); // Replace with your actual project ID
   
   // Create an instance of the Account API
   const account = new Account(client);
   
+  // Handle the signup form submission
   const signupForm = document.getElementById('signup-form');
   
   // Listen for form submission
@@ -83,5 +83,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   
 
-
- 
+  
