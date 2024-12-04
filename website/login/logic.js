@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Import the Firebase libraries
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -99,5 +99,38 @@ signupForm.addEventListener('submit', function (event) {
   
               console.error('Error Code:', error.code); // Log the specific Firebase error (for debugging)
               alert(errorMessage); // Show the custom error message
+        });
+});
+
+
+const loginForm = document.getElementById('login-form');
+loginForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Success: Navigate to profile page or show success message
+            alert('Login successful!');
+            window.location.href = '/profile.html'; // Replace with the actual path to your profile page
+        })
+        .catch((error) => {
+            // Handle specific Firebase errors with custom messages
+            let errorMessage = 'An error occurred. Please try again.';
+            
+            if (error.code === 'auth/user-not-found') {
+                errorMessage = 'No account found with this email.';
+            } else if (error.code === 'auth/wrong-password') {
+                errorMessage = 'Incorrect password. Please try again.';
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage = 'The email address you entered is invalid.';
+            } else if (error.code === 'auth/missing-email') {
+                errorMessage = 'Please enter an email address.';
+            }
+
+            console.error('Error Code:', error.code); // Log the specific Firebase error (for debugging)
+            alert(errorMessage); // Show the custom error message
         });
 });
