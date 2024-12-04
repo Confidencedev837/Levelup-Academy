@@ -46,20 +46,24 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
- // Your web app's Firebase configuration
- const firebaseConfig = {
-  apiKey: "AIzaSyBl5Rp-B2hgfTUZfqouhTQyC-YGKtChbmw",
-  authDomain: "levelup-academy-ed1f8.firebaseapp.com",
-  projectId: "levelup-academy-ed1f8",
-  storageBucket: "levelup-academy-ed1f8.appspot.com", // Corrected URL
-  messagingSenderId: "713868724590",
-  appId: "1:713868724590:web:93c4500ae58f11caa5d97f",
-  measurementId: "G-4L810NXKQW"
-};
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const analytics = firebase.analytics();
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBl5Rp-B2hgfTUZfqouhTQyC-YGKtChbmw",
+    authDomain: "levelup-academy-ed1f8.firebaseapp.com",
+    projectId: "levelup-academy-ed1f8",
+    storageBucket: "levelup-academy-ed1f8.firebasestorage.app",
+    messagingSenderId: "713868724590",
+    appId: "1:713868724590:web:93c4500ae58f11caa5d97f",
+    measurementId: "G-4L810NXKQW"
+  };
 
-console.log('Firebase Initialized:', app);
- 
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
