@@ -1,3 +1,30 @@
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+document.addEventListener('keydown', (e) => {
+  if (e.key === "F12" || (e.ctrlKey && (e.key === "i" || e.key === "I"))) {
+    e.preventDefault();
+  }
+});
+document.addEventListener('keydown', (event) => {
+  // Check for Ctrl + Shift + C
+  if (event.ctrlKey && event.shiftKey && event.code === 'KeyC') {
+    event.preventDefault();
+    alert('Inspect Element is disabled...No Code here');
+  }
+  // Check for Ctrl + Shift + I
+  if (event.ctrlKey && event.shiftKey && event.code === 'KeyI') {
+    event.preventDefault();
+    alert('Developer Tools are disabled....Please Rest!!');
+  }
+  // Check for F12 key
+  if (event.code === 'F12') {
+    event.preventDefault();
+    alert('Developer Tools are disabled.');
+  }
+});
+
+
+
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, onAuthStateChanged ,signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
