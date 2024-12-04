@@ -80,6 +80,12 @@ signupForm.addEventListener('submit', function (event) {
 
 // Handle the login form submission
 
+
+client
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite endpoint
+    .setProject('674ef28f0002deb93b5f'); // Replace with your project ID
+
+// Handle the login form submission
 const loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent the form from submitting the default way (page refresh)
@@ -87,9 +93,11 @@ loginForm.addEventListener('submit', function (event) {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
-    // Call the createEmailSession method for logging in
+    // Create an instance of the Account API
     const account = new Appwrite.Account(client);
-    account.createEmailSession( email, password,)
+
+    // Call the createEmailSession method for logging in
+    account.createEmailSession(email, password)
         .then(response => {
             console.log('Login successful:', response);
             alert('Login successful! Redirecting to your profile page...');
