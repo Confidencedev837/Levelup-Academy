@@ -64,6 +64,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const user = auth.currentUser;
 
 // Handle the sign-up form submission
 const signupForm = document.getElementById('signup-form');
@@ -102,7 +103,7 @@ signupForm.addEventListener('submit', function (event) {
         });
 });
 
-
+//login logic
 const loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent default form submission
@@ -134,3 +135,18 @@ loginForm.addEventListener('submit', function (event) {
             alert(errorMessage); // Show the custom error message
         });
 });
+
+
+//profile logic
+if (user) {
+  // Display user details on the profile page
+  document.getElementById('profile-name').textContent = user.displayName || 'User';
+  document.getElementById('profile-email').textContent = user.email;
+  
+  // Set profile picture if available, otherwise set default
+  const profilePic = user.photoURL || 'default-avatar.png';
+  document.getElementById('profile-pic').src = profilePic;
+} else {
+  // If no user is signed in, redirect to login page
+  window.location.href = 'loginpage.html'; // Redirect to login if not logged in
+}
