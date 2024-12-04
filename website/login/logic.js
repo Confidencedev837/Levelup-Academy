@@ -80,6 +80,7 @@ signupForm.addEventListener('submit', function (event) {
             const user = userCredential.user;
             console.log('User signed up:', user);
             alert('Sign up successful! Welcome, ' + email);
+            window.location.href = 'profile.html'; // Redirect to the profile page
         })
         .catch((error) => {
             // Handle errors
