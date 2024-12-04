@@ -45,67 +45,21 @@ document.addEventListener("DOMContentLoaded", () => {
     
   });
 
-// Initialize the Appwrite client
-const client = new Appwrite.Client();
-client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite endpoint
-    .setProject('674ef28f0002deb93b5f'); // Your project ID
 
-// Create an instance of the Account API
-const account = new Appwrite.Account(client);
+ // Your web app's Firebase configuration
+ const firebaseConfig = {
+  apiKey: "AIzaSyBl5Rp-B2hgfTUZfqouhTQyC-YGKtChbmw",
+  authDomain: "levelup-academy-ed1f8.firebaseapp.com",
+  projectId: "levelup-academy-ed1f8",
+  storageBucket: "levelup-academy-ed1f8.appspot.com", // Corrected URL
+  messagingSenderId: "713868724590",
+  appId: "1:713868724590:web:93c4500ae58f11caa5d97f",
+  measurementId: "G-4L810NXKQW"
+};
 
-// Handle the signup form submission
-const signupForm = document.getElementById('signup-form');
-signupForm.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent form from submitting the default way (page refresh)
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const analytics = firebase.analytics();
 
-    const name = document.getElementById('signup-name').value;
-    const email = document.getElementById('signup-email').value;
-    const password = document.getElementById('signup-password').value;
-
-    // Call the create user method using the Account API
-    account.create('unique()', email, password, name)
-    .then(response => {
-        console.log('User created:', response);
-        alert('Signup successful! Please login.');
-        showForm('login'); // Show login form after successful signup
-    })
-    .catch(error => {
-        console.error('Error creating user:', error);
-        // Show the error message to the user
-        alert(`Signup failed: ${error.message}`);
-    });
-
-});
-
-// Handle the login form submission
-
-
-client
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite endpoint
-    .setProject('674ef28f0002deb93b5f'); // Replace with your project ID
-
-// Handle the login form submission
-const loginForm = document.getElementById('login-form');
-loginForm.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent the form from submitting the default way (page refresh)
-
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-
-    // Create an instance of the Account API
-    const account = new Appwrite.Account(client);
-
-    // Call the createEmailSession method for logging in
-    account.createSession(email, password)
-        .then(response => {
-            console.log('Login successful:', response);
-            alert('Login successful! Redirecting to your profile page...');
-            window.location.href = '/profile.html'; // Replace with the actual path to your profile page
-        })
-        .catch(error => {
-            console.error('Login failed:', error);
-            // Show the error message to the user
-            alert(`Login failed: ${error.message}`);
-        });
-});
+console.log('Firebase Initialized:', app);
+ 
