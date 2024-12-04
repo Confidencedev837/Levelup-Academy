@@ -114,7 +114,7 @@ loginForm.addEventListener('submit', function (event) {
         .then((userCredential) => {
             // Success: Navigate to profile page or show success message
             alert('Login successful!');
-            window.location.href = '/profile.html'; // Replace with the actual path to your profile page
+            window.location.href = 'profile.html'; // Replace with the actual path to your profile page
         })
         .catch((error) => {
             // Handle specific Firebase errors with custom messages
