@@ -13,7 +13,7 @@ document.addEventListener('keydown', (event) => {
   // Check for Ctrl + Shift + I
   if (event.ctrlKey && event.shiftKey && event.code === 'KeyI') {
     event.preventDefault();
-    alert('Developer Tools are disabled....Pls Rest!!');
+    alert('Developer Tools are disabled....Please Rest!!');
   }
   // Check for F12 key
   if (event.code === 'F12') {
