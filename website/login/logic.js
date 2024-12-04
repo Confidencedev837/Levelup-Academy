@@ -84,7 +84,20 @@ signupForm.addEventListener('submit', function (event) {
         })
         .catch((error) => {
             // Handle errors
-            console.error('Error signing up:', error);
-            alert(`Sign up failed: ${error.message}`);
+              // Handle specific Firebase errors with custom messages
+              let errorMessage = 'An error occurred. Please try again.';
+            
+              if (error.code === 'auth/email-already-in-use') {
+                  errorMessage = 'This email is already associated with an account.';
+              } else if (error.code === 'auth/invalid-email') {
+                  errorMessage = 'The email address you entered is invalid.';
+              } else if (error.code === 'auth/weak-password') {
+                  errorMessage = 'Your password is too weak. Please choose a stronger password.';
+              } else if (error.code === 'auth/missing-email') {
+                  errorMessage = 'Please enter an email address.';
+              }
+  
+              console.error('Error Code:', error.code); // Log the specific Firebase error (for debugging)
+              alert(errorMessage); // Show the custom error message
         });
 });
