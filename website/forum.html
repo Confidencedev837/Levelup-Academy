@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LevelUp Academy | Forum</title>
+  <link rel="stylesheet" href="nav.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=login" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+  <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Playpen+Sans:wght@100..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
+  <script type="module" src="login/logic.js"></script>
+  <!-- <script type="module" src="/login/profilelogic.js"></script> -->
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js"></script>
+  <script src="script.js"></script>
+  <!-- <script type="module" src="forum.js" defer></script> -->
+  <style>
+    :root {
+      --background: #1e1e1e; /* Dark background (VS Code theme) */
+      --foreground: #252526; /* Slightly lighter background */
+      --text: #d4d4d4; /* Light text color */
+      --highlight: #f4b400; /* Google Yellow for highlights */
+      --shadow-light: rgba(255, 255, 255, 0.1);
+      --shadow-dark: rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      font-family: "Playpen sans";
+      background: var(--background);
+      color: var(--text);
+      margin: 0;
+      padding: 0%;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: var(--highlight);
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .post-container {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: fit-content;
+    }
+
+    .post {
+      background: var(--foreground);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+      transition: transform 0.2s;
+    }
+
+    .post:hover {
+      transform: scale(1.01);
+    }
+
+    .post img {
+      width: min-content;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .post h2 {
+      color: var(--highlight);
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .post p {
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .comments {
+      margin-top: 15px;
+      padding: 15px;
+      background: var(--foreground);
+      border-radius: 10px;
+      box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+    }
+
+    .comment {
+      margin-bottom: 10px;
+      padding: 8px;
+      border-left: 4px solid var(--highlight);
+    }
+
+    .comment-form {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .comment-form input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: var(--foreground);
+      color: var(--text);
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    }
+
+    .comment-form input:focus {
+      outline: 2px solid var(--highlight);
+    }
+
+    #comment-button-post1, #comment-button-post2{
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: var(--highlight);
+      color: var(--foreground);
+      font-weight: bold;
+      cursor: pointer;
+      width: fit-content;
+      box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+    }
+
+    .comment-form button:hover {
+      background: #ffd54f; /* Lighter Yellow */
+    }
+   
+  
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo"><a href="index.html" id="Logo">Level<span style="color: rgba(255, 72, 0, 0.842);">Up Academy</span></a></div>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="menu">
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="forum.html">Forum</a>
+    </div>
+    <div class="search-bar">
+        <span class="material-symbols-outlined">
+            search
+        </span>
+        <input type="text" placeholder="What do you want to learn?">
+    </div>
+    <div class="cta-buttons">
+        <a href="login/loginpage.html" class="login">
+            <span class="material-symbols-outlined" id="loginbutton">
+                login
+            </span>
+            Login
+        </a>
+        <a href="login/loginpage.html" class="get-started">Get Started</a>
+    </div>
+</nav>
+  <h1>LevelUp Academy Forum</h1>
+  <div class="post-container">
+    <!-- Hardcoded Post 1 -->
+    <div class="post" id="post1">
+     
+      <h2>Welcome to the Forum!</h2>
+      <p>Welcome to the LevelUp Academy Forum! This is a place where you can discuss your favorite coding topics, web development, app creation, and more. Whether you’re a beginner or an expert, there’s always something new to learn. Please feel free to share your thoughts, ask questions, and help others in the community.</p>
+      <div class="comments" id="comments-post1"></div>
+      <div class="comment-form">
+        <input type="text" id="comment-input-post1" placeholder="Add a comment..." />
+        <a href="#" id="comment-button-post1">comment</a>
+      </div>
+    </div>
+
+    <!-- Hardcoded Post 2 -->
+    <div class="post" id="post2">
+      <!-- <img src="https://via.placeholder.com/800x400/8c8c8c/fff?text=Flutter+vs+React+Native" alt="Post Image"> -->
+      <h2>Flutter vs React Native</h2>
+      <p>Which mobile development framework do you prefer and why? In this post, we’ll be comparing Flutter and React Native, two of the most popular frameworks for cross-platform mobile development. Each framework has its strengths, and depending on the use case, one might be better than the other. Let’s dive into the differences and similarities!</p>
+      <div class="comments" id="comments-post2"></div>
+      <div class="comment-form">
+        <input type="text" id="comment-input-post2" placeholder="Add a comment..." />
+        <a href="#" id="comment-button-post2">comment</a>
+        <script type="module">
+            // Firebase Configuration
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+            import { getFirestore, collection, addDoc, query, onSnapshot } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
+            import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+        
+            const firebaseConfig = {
+                apiKey: "AIzaSyBl5Rp-B2hgfTUZfqouhTQyC-YGKtChbmw",
+                authDomain: "levelup-academy-ed1f8.firebaseapp.com",
+                projectId: "levelup-academy-ed1f8",
+                storageBucket: "levelup-academy-ed1f8.appspot.com",
+                messagingSenderId: "713868724590",
+                appId: "1:713868724590:web:93c4500ae58f11caa5d97f",
+                measurementId: "G-4L810NXKQW"
+            };
+        
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+            const auth = getAuth(app);
+            
+            let currentUserName = "Guest User";
+        
+            // Listen for auth state changes
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    currentUserName = user.displayName || user.email.split('@')[0];
+                } else {
+                    currentUserName = "Guest User";
+                }
+            });
+        
+            // Function to render comments
+            const renderComments = (postId) => {
+    const commentsContainer = document.getElementById(`comments-${postId}`);
+    const commentsQuery = query(collection(db, "posts", postId, "comments"));
+
+    onSnapshot(commentsQuery, (snapshot) => {
+        commentsContainer.innerHTML = ""; 
+        snapshot.forEach((doc) => {
+            const comment = doc.data();
+
+            // Check if the timestamp exists
+            const timestamp = comment.timestamp;
+            let formattedDate = "Unknown Date";
+            if (timestamp) {
+                // Convert Firestore timestamp to JavaScript Date
+                const date = timestamp.toDate();
+
+                // Format the date
+                formattedDate = date.toLocaleString('en-US', {
+                    weekday: 'short',  // e.g., "Mon"
+                    year: 'numeric',   // e.g., "2024"
+                    month: 'short',    // e.g., "Dec"
+                    day: 'numeric',    // e.g., "4"
+                    hour: '2-digit',   // e.g., "03"
+                    minute: '2-digit', // e.g., "45"
+                    hour12: true       // e.g., "AM/PM"
+                });
+            }
+
+            // Create the comment element
+            const commentElement = document.createElement("div");
+            commentElement.className = "comment";
+            commentElement.innerHTML = `
+                <strong>${comment.userName}:</strong> <br><span style="color:#f4b400;">${comment.text}<span><br>
+                <span style="font-size: 0.8rem; color: gray;">Posted on: ${formattedDate}</span>
+            `;
+            commentsContainer.appendChild(commentElement);
+        });
+    });
+};
+
+        
+            // Define addComment function
+            const addComment = async (postId) => {
+                const inputField = document.getElementById(`comment-input-${postId}`);
+                const commentText = inputField.value.trim();
+        
+                if (!commentText) return;
+        
+                await addDoc(collection(db, "posts", postId, "comments"), {
+                    text: commentText,
+                    userName: currentUserName,
+                    timestamp: new Date()
+                });
+        
+                inputField.value = "";  // Clear input field
+            };
+        
+            // Add event listeners to buttons
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('comment-button-post1').addEventListener('click', function() {
+                    addComment('post1');
+                });
+                document.getElementById('comment-button-post2').addEventListener('click', function() {
+                    addComment('post2');
+                });
+            });
+        
+            // Initialize comments for posts
+            renderComments("post1");
+            renderComments("post2");
+        
+          </script>
+      </div>
+    </div>
+  </div>
+
+ 
+</body>
+</html>
